@@ -1,0 +1,10 @@
+{
+	"name": "synapse-ws-sqlOnDemand--burke-demo-stage",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/32615f4b-a461-47ee-9e8e-104627d989da/resourceGroups/Burke_Stage/providers/Microsoft.Synapse/workspaces/burke-demo-stage",
+		"groupId": "sqlOnDemand",
+		"fqdns": [
+			"burke-demo-stage-ondemand.ce09a55b-b95b-4d8b-84ea-22819faa1569.sql.azuresynapse.net"
+		]
+	}
+}
