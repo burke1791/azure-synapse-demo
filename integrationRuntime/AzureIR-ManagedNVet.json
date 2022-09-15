@@ -8,7 +8,11 @@
 				"dataFlowProperties": {
 					"computeType": "General",
 					"coreCount": 4,
-					"timeToLive": 10
+					"timeToLive": 10,
+					"cleanup": true
+				},
+				"pipelineExternalComputeScaleProperties": {
+					"timeToLive": 60
 				}
 			}
 		},
