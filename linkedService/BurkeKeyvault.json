@@ -1,0 +1,10 @@
+{
+	"name": "BurkeKeyvault",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://BurkeDemo2TestKeyvault.vault.azure.net/"
+		}
+	}
+}
