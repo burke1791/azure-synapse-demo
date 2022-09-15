@@ -1,0 +1,22 @@
+{
+	"name": "Postgres",
+	"properties": {
+		"annotations": [],
+		"type": "AzurePostgreSql",
+		"typeProperties": {
+			"connectionString": "Host=Postgres-Burke-Test.postgres.database.azure.com;Port=5432;Database=postgres;UID=burke@postgres-burke-test;EncryptionMethod=1;ValidateServerCertificate=1",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "BurkeKeyvault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "PostgresPassword"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AzureIR-ManagedNVet",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
