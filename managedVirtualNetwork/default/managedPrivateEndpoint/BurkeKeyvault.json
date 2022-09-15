@@ -1,0 +1,7 @@
+{
+	"name": "BurkeKeyvault",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/32615f4b-a461-47ee-9e8e-104627d989da/resourceGroups/Burke_Test/providers/Microsoft.KeyVault/vaults/BurkeDemo2TestKeyvault",
+		"groupId": "vault"
+	}
+}
