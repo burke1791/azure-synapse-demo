@@ -1,0 +1,10 @@
+{
+	"name": "synapse-ws-sqlOnDemand--burke-demo-test",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/32615f4b-a461-47ee-9e8e-104627d989da/resourceGroups/Burke_Test/providers/Microsoft.Synapse/workspaces/burke-demo-test",
+		"groupId": "sqlOnDemand",
+		"fqdns": [
+			"burke-demo-test-ondemand.efc1c0c5-f5e6-4fe2-a8dd-fed759459756.sql.azuresynapse.net"
+		]
+	}
+}
