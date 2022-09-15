@@ -1,0 +1,21 @@
+{
+	"name": "PersonParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "data.parquet",
+				"folderPath": "person",
+				"fileSystem": "burke"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
