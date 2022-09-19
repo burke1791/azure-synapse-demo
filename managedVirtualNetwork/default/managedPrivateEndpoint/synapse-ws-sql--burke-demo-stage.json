@@ -1,0 +1,10 @@
+{
+	"name": "synapse-ws-sql--burke-demo-stage",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/32615f4b-a461-47ee-9e8e-104627d989da/resourceGroups/Burke_Stage/providers/Microsoft.Synapse/workspaces/burke-demo-stage",
+		"groupId": "sql",
+		"fqdns": [
+			"burke-demo-stage.d47653e2-2d7a-45aa-b284-a5827c882e94.sql.azuresynapse.net"
+		]
+	}
+}
