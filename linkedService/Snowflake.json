@@ -1,0 +1,33 @@
+{
+	"name": "Snowflake",
+	"properties": {
+		"parameters": {
+			"SnowflakeAccount": {
+				"type": "string"
+			},
+			"SnowflakeUsername": {
+				"type": "string"
+			},
+			"SnowflakeDB": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Snowflake",
+		"typeProperties": {
+			"connectionString": "jdbc:snowflake://@{linkedService().SnowflakeAccount}.snowflakecomputing.com/?user=@{linkedService().SnowflakeUsername}&db=@{linkedService().SnowflakeDB}&warehouse=COMPUTE_WH&role=DB_ETL_ROLE",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SnowflakePassword"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
