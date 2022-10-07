@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Snowflake'"
 		},
+		"UTCDateToSnowflake_properties_parameters_query_defaultValue": {
+			"type": "string",
+			"defaultValue": "Select [UTCDate] = Cast('10 Oct 2022' As DateTime2(0))"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"type": "secureString",
 			"metadata": "Secure string for 'baseUrl' of 'AzureKeyVault'"
@@ -153,7 +157,7 @@
 				"parameters": {
 					"query": {
 						"type": "string",
-						"defaultValue": "Select [UTCDate] = Cast('10 Oct 2022' As DateTime2(0))"
+						"defaultValue": "[parameters('UTCDateToSnowflake_properties_parameters_query_defaultValue')]"
 					}
 				},
 				"annotations": []

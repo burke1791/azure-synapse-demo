@@ -11,6 +11,9 @@
 		"Snowflake_connectionString": {
 			"value": ""
 		},
+		"UTCDateToSnowflake_properties_parameters_query_defaultValue": {
+			"value": "Select [UTCDate] = Cast('10 Oct 2022' As DateTime2(0))"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": ""
 		},
