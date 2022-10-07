@@ -1,5 +1,5 @@
 {
-	"name": "CreateParquet",
+	"name": "UTCDateToSnowflake",
 	"properties": {
 		"activities": [
 			{
