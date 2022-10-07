@@ -1,0 +1,12 @@
+{
+	"name": "ServerlessSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ServerlessSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": []
+	}
+}
