@@ -221,7 +221,15 @@
 				"annotations": [],
 				"type": "AzureSqlDW",
 				"typeProperties": {
-					"connectionString": "[parameters('ServerlessSQL_connectionString')]"
+					"connectionString": "[parameters('ServerlessSQL_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "ServerlessSqlPassword"
+					}
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -229,7 +237,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
+				"[concat(variables('workspaceId'), '/linkedServices/AzureKeyVault')]"
 			]
 		},
 		{
