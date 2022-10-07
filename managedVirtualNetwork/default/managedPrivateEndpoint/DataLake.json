@@ -1,7 +1,0 @@
-{
-	"name": "DataLake",
-	"properties": {
-		"privateLinkResourceId": "/subscriptions/626baded-f2b7-4eec-a426-98a1d50e6139/resourceGroups/Test/providers/Microsoft.Storage/storageAccounts/burkewarehousedev",
-		"groupId": "dfs"
-	}
-}
