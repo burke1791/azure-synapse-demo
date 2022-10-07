@@ -65,7 +65,7 @@
 			},
 			{
 				"name": "DumpToSnowflake",
-				"type": "Copy",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
 						"activity": "CreateParquet",
@@ -83,58 +83,12 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "ParquetSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"wildcardFolderPath": "utcdate",
-							"wildcardFileName": "*.parquet",
-							"enablePartitionDiscovery": false
-						}
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
 					},
-					"sink": {
-						"type": "SnowflakeSink",
-						"importSettings": {
-							"type": "SnowflakeImportCopyCommand"
-						}
-					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "DataLake",
-							"type": "LinkedServiceReference"
-						},
-						"path": "burke/utcdate"
-					},
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "UTCDate",
-									"type": "String"
-								},
-								"sink": {
-									"name": "UTCDATE",
-									"type": "DateTime"
-								}
-							}
-						]
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "UTCDateParquet",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "SnowflakeUTCDate",
-						"type": "DatasetReference"
-					}
-				]
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"parameters": {

@@ -1,0 +1,52 @@
+{
+	"name": "Snowflake",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "UTCDateParquet",
+						"type": "DatasetReference"
+					},
+					"name": "UTCDate"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SnowflakeUTCDate",
+						"type": "DatasetReference"
+					},
+					"name": "Snowflake"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          UTCDate as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: true,",
+				"     format: 'parquet') ~> UTCDate",
+				"UTCDate sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          UTCDATE as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          UTCDATE = UTCDate",
+				"     )) ~> Snowflake"
+			]
+		}
+	}
+}
