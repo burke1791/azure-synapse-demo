@@ -5,11 +5,17 @@
 		"workspaceName": {
 			"value": "burkewarehouse-dev"
 		},
+		"ServerlessSQL_connectionString": {
+			"value": ""
+		},
 		"Snowflake_connectionString": {
 			"value": ""
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://BurkeKeyvaultDev.vault.azure.net/"
+		},
+		"DataLake_properties_typeProperties_url": {
+			"value": "https://burkewarehousedev.dfs.core.windows.net/"
 		}
 	}
 }
