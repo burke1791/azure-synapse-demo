@@ -15,12 +15,7 @@
             ]
           }
         }
-      ],
-      "parameters": {
-        "query": {
-          "type": "="
-        }
-      }
+      ]
     }
   },
   "Microsoft.Synapse/workspaces/integrationRuntimes": {
