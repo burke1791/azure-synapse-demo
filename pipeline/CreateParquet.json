@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "GetDate",
+				"name": "CreateParquet",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -25,26 +25,15 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "SnowflakeSink",
-						"importSettings": {
-							"type": "SnowflakeImportCopyCommand"
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "UTCDate",
-									"type": "String"
-								},
-								"sink": {
-									"name": "UTCDATE"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -54,7 +43,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SnowflakeTable1",
+						"referenceName": "UTCDateParquet",
 						"type": "DatasetReference"
 					}
 				]
