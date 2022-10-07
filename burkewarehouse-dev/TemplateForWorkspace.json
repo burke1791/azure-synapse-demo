@@ -16,12 +16,23 @@
 			"metadata": "Secure string for 'connectionString' of 'Snowflake'"
 		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://BurkeKeyvaultDev.vault.azure.net/"
+			"type": "secureString",
+			"metadata": "Secure string for 'baseUrl' of 'AzureKeyVault'"
 		},
-		"DataLake_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://burkewarehousedev.dfs.core.windows.net/"
+		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
+			"type": "object",
+			"defaultValue": {
+				"location": "AutoResolve",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 0,
+					"cleanup": true
+				},
+				"pipelineExternalComputeScaleProperties": {
+					"timeToLive": 60
+				}
+			}
 		}
 	},
 	"variables": {
@@ -278,7 +289,7 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('DataLake_properties_typeProperties_url')]"
+					"url": "https://burkewarehousedev.dfs.core.windows.net/"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -363,18 +374,7 @@
 			"properties": {
 				"type": "Managed",
 				"typeProperties": {
-					"computeProperties": {
-						"location": "AutoResolve",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 0,
-							"cleanup": true
-						},
-						"pipelineExternalComputeScaleProperties": {
-							"timeToLive": 60
-						}
-					}
+					"computeProperties": "[parameters('AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties')]"
 				},
 				"managedVirtualNetwork": {
 					"type": "ManagedVirtualNetworkReference",
