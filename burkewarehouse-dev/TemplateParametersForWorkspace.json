@@ -11,6 +11,9 @@
 		"Snowflake_connectionString": {
 			"value": ""
 		},
+		"UTCDateToSnowflake_properties_parameters_query_type": {
+			"value": "string"
+		},
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": ""
 		},
