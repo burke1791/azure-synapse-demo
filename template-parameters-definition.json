@@ -53,6 +53,13 @@
         }
       }
     },
+    "AzureBlobFS": {
+      "properties": {
+        "typeProperties": {
+          "url": "-:-webUrl:string"
+        }
+      }
+    },
     "AzureDataLakeStore": {
       "properties": {
         "typeProperties": {
