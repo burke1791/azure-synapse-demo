@@ -23,6 +23,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'baseUrl' of 'AzureKeyVault'"
 		},
+		"DataLake_webUrl": {
+			"type": "string"
+		},
 		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
 			"type": "object",
 			"defaultValue": {
@@ -293,7 +296,7 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "https://burkewarehousedev.dfs.core.windows.net/"
+					"url": "[parameters('DataLake_webUrl')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",

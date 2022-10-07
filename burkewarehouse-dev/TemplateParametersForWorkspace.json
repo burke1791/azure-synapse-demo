@@ -17,6 +17,9 @@
 		"AzureKeyVault_properties_typeProperties_baseUrl": {
 			"value": ""
 		},
+		"DataLake_webUrl": {
+			"value": ""
+		},
 		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
 			"value": {
 				"location": "AutoResolve",
