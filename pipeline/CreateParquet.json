@@ -124,7 +124,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SnowflakeTable1",
+						"referenceName": "SnowflakeUTCDate",
 						"type": "DatasetReference"
 					}
 				]
