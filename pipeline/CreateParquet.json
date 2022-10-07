@@ -118,7 +118,7 @@
 		"parameters": {
 			"query": {
 				"type": "string",
-				"defaultValue": "Select [UTCDate] = '10 Oct 2022'"
+				"defaultValue": "Select [UTCDate] = Cast('10 Oct 2022' As DateTime2(0))"
 			}
 		},
 		"annotations": []
