@@ -99,7 +99,14 @@
 							"type": "SnowflakeImportCopyCommand"
 						}
 					},
-					"enableStaging": false,
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "DataLake",
+							"type": "LinkedServiceReference"
+						},
+						"path": "burke/utcdate"
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
