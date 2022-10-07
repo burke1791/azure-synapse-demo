@@ -29,7 +29,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('workspaceName'), '/CreateParquet')]",
+			"name": "[concat(parameters('workspaceName'), '/UTCDateToSnowflake')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -65,7 +65,22 @@
 									"type": "ParquetWriteSettings"
 								}
 							},
-							"enableStaging": false
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "UTCDate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "UTCDate",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
 						},
 						"inputs": [
 							{
@@ -81,6 +96,43 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "DumpToSnowflake",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "CreateParquet",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Snowflake",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"UTCDate": {},
+									"Snowflake": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"policy": {
@@ -90,14 +142,16 @@
 				"parameters": {
 					"query": {
 						"type": "string",
-						"defaultValue": "Select [UTCDate] = '10 Oct 2022'"
+						"defaultValue": "Select [UTCDate] = Cast('10 Oct 2022' As DateTime2(0))"
 					}
 				},
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/datasets/ServerlessSQL')]",
-				"[concat(variables('workspaceId'), '/datasets/UTCDateParquet')]"
+				"[concat(variables('workspaceId'), '/datasets/UTCDateParquet')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
+				"[concat(variables('workspaceId'), '/dataflows/Snowflake')]"
 			]
 		},
 		{
@@ -295,6 +349,97 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/DataLake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SnowflakeUTCDate')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Snowflake",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"SnowflakeAccount": "pg06363.central-us.azure",
+						"SnowflakeUsername": "SYNAPSE",
+						"SnowflakeDB": "BURKE_DWH"
+					}
+				},
+				"annotations": [],
+				"type": "SnowflakeTable",
+				"schema": [
+					{
+						"name": "UTCDATE",
+						"type": "TIMESTAMP_NTZ",
+						"precision": 29,
+						"scale": 9
+					}
+				],
+				"typeProperties": {
+					"schema": "PUBLIC",
+					"table": "DATETEST"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/Snowflake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Snowflake')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "UTCDateParquet",
+								"type": "DatasetReference"
+							},
+							"name": "UTCDate"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "SnowflakeUTCDate",
+								"type": "DatasetReference"
+							},
+							"name": "Snowflake"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          UTCDate as timestamp",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: true,",
+						"     format: 'parquet') ~> UTCDate",
+						"UTCDate sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          UTCDATE as timestamp",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     stageInsert: true,",
+						"     mapColumn(",
+						"          UTCDATE = UTCDate",
+						"     )) ~> Snowflake"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/datasets/UTCDateParquet')]",
+				"[concat(variables('workspaceId'), '/datasets/SnowflakeUTCDate')]"
 			]
 		}
 	]
